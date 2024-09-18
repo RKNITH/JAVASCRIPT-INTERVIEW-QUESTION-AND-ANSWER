@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Interview Q&A</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>JavaScript Interview Q&A</h1>
+    </header>
+
+    <main>
+        <!-- Question 1 -->
+        <section class="question-container">
+            <h2>Question 1: What is the difference between <code>var</code>, <code>let</code>, and <code>const</code>?
+            </h2>
+            <p class="answer">The main differences between <code>var</code>, <code>let</code>, and <code>const</code>
+                are:</p>
+            <ul>
+                <li><strong>var</strong> is function-scoped and allows redeclaration.</li>
+                <li><strong>let</strong> is block-scoped and does not allow redeclaration but can be reassigned.</li>
+                <li><strong>const</strong> is block-scoped, cannot be redeclared, and cannot be reassigned.</li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+var x = 10;
+let y = 20;
+const z = 30;
+x = 15; // Allowed
+y = 25; // Allowed
+z = 35; // Error: Assignment to constant variable
+            </pre>
+        </section>
+
+        <!-- Question 2 -->
+        <section class="question-container">
+            <h2>Question 2: What is the difference between <code>==</code> and <code>===</code>?</h2>
+            <p class="answer">The <code>==</code> operator checks for equality after type conversion, while
+                <code>===</code> checks for strict equality without type conversion.
+            </p>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+console.log(5 == '5');  // true (Type conversion happens)
+console.log(5 === '5'); // false (No type conversion, checks type and value)
+            </pre>
+        </section>
+
+        <!-- Question 3 -->
+        <section class="question-container">
+            <h2>Question 3: Explain scopes in JavaScript: global, local, functional, and block.</h2>
+            <p class="answer">
+                Scopes determine the accessibility of variables:
+            </p>
+            <ul>
+                <li><strong>Global scope:</strong> Variables are accessible anywhere in the program.</li>
+                <li><strong>Local scope:</strong> Variables are accessible only within the function where they are
+                    defined.</li>
+                <li><strong>Functional scope:</strong> Specific to <code>var</code>, where variables are scoped to the
+                    function.</li>
+                <li><strong>Block scope:</strong> Specific to <code>let</code> and <code>const</code>, where variables
+                    are scoped to a block (e.g., inside an <code>if</code> statement).</li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+let globalVar = "I'm global!";
+
+function testScope() {
+    let localVar = "I'm local!";
+    if (true) {
+        let blockVar = "I'm block-scoped!";
+        console.log(blockVar); // Accessible here
+    }
+    console.log(localVar);  // Accessible here
+    // console.log(blockVar); // Error: blockVar is not defined
+}
+
+console.log(globalVar); // Accessible everywhere
+// console.log(localVar);  // Error: localVar is not defined
+            </pre>
+        </section>
+
+        <!-- Question 4 -->
+        <section class="question-container">
+            <h2>Question 4: Explain the DOM Tree.</h2>
+            <p class="answer">The DOM (Document Object Model) Tree represents the structure of an HTML document. It
+                organizes the document into nodes (elements, attributes, text, etc.) in a hierarchical tree structure.
+            </p>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+<!-- Example DOM structure -->
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+    <h1>Main Heading</h1>
+    <p>Paragraph text</p>
+  </body>
+</html>
+            </pre>
+        </section>
+
+        <!-- Question 5 -->
+        <section class="question-container">
+            <h2>Question 5: What is an arrow function, and how is it different from a regular function?</h2>
+            <p class="answer">An arrow function is a concise way to write functions in JavaScript. It differs from
+                regular functions in how it handles the <code>this</code> keyword. Arrow functions don't have their own
+                <code>this</code>; they inherit it from the surrounding scope.
+            </p>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+// Regular function
+function regularFunc() {
+    console.log(this); // Refers to the object calling the function
+}
+
+// Arrow function
+const arrowFunc = () => {
+    console.log(this); // Inherits 'this' from surrounding scope
+}
+
+regularFunc(); // 'this' refers to global object or undefined in strict mode
+arrowFunc();   // 'this' refers to the same as surrounding context
+            </pre>
+        </section>
+
+        <!-- Question 6 -->
+        <section class="question-container">
+            <h2>Question 6: What is the difference between <code>null</code> and <code>undefined</code>?</h2>
+            <p class="answer">
+                <strong>null</strong> represents the intentional absence of any object value, while
+                <strong>undefined</strong> means a variable has been declared but not yet assigned a value.
+            </p>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+let a;
+console.log(a);  // undefined (no value assigned)
+
+let b = null;
+console.log(b);  // null (explicitly no value)
+    </pre>
+        </section>
+
+        <!-- Question 7 -->
+        <section class="question-container">
+            <h2>Question 7: How do loops work in JavaScript?</h2>
+            <p class="answer">
+                Loops in JavaScript allow you to repeatedly execute a block of code. Common loops include:
+            </p>
+            <ul>
+                <li><strong>for</strong>: Repeats a block of code a certain number of times.</li>
+                <li><strong>while</strong>: Repeats a block of code as long as a condition is true.</li>
+                <li><strong>do...while</strong>: Similar to <code>while</code>, but executes the block at least once.
+                </li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+// for loop
+for (let i = 0; i < 5; i++) {
+    console.log(i);
+}
+
+// while loop
+let count = 0;
+while (count < 5) {
+    console.log(count);
+    count++;
+}
+    </pre>
+        </section>
+
+        <!-- Question 8 -->
+        <section class="question-container">
+            <h2>Question 8: Explain logical operators in JavaScript.</h2>
+            <p class="answer">
+                Logical operators are used to combine or invert boolean values:
+            </p>
+            <ul>
+                <li><strong>AND (&&)</strong>: Returns true if both operands are true.</li>
+                <li><strong>OR (||)</strong>: Returns true if at least one operand is true.</li>
+                <li><strong>NOT (!)</strong>: Inverts the boolean value.</li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+console.log(true && false);  // false
+console.log(true || false);  // true
+console.log(!true);          // false
+    </pre>
+        </section>
+
+        <!-- Question 9 -->
+        <section class="question-container">
+            <h2>Question 9: How can we write multi-line strings in JavaScript?</h2>
+            <p class="answer">
+                Multi-line strings in JavaScript can be written using backticks (<code>`</code>) for template literals,
+                or by concatenating strings.
+            </p>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+// Using backticks (template literals)
+const multiLineString = `This is a 
+multi-line string in JavaScript.`;
+
+// Using concatenation
+const multiLineConcat = "This is a " +
+    "multi-line string using concatenation.";
+    </pre>
+        </section>
+
+        <!-- Question 10 -->
+        <section class="question-container">
+            <h2>Question 10: What are truthy and falsy values in JavaScript?</h2>
+            <p class="answer">
+                In JavaScript, a value is considered truthy if it evaluates to <strong>true</strong> in a boolean
+                context, and falsy if it evaluates to <strong>false</strong>.
+                Falsy values include:
+            </p>
+            <ul>
+                <li><strong>0</strong></li>
+                <li><strong>""</strong> (empty string)</li>
+                <li><strong>null</strong></li>
+                <li><strong>undefined</strong></li>
+                <li><strong>false</strong></li>
+                <li><strong>NaN</strong></li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+// Falsy values
+if (0) {
+    console.log("This won't run, because 0 is falsy.");
+}
+
+// Truthy values
+if ("non-empty string") {
+    console.log("This will run, because non-empty strings are truthy.");
+}
+    </pre>
+        </section>
+
+        <!-- Question 11 -->
+        <section class="question-container">
+            <h2>Question 11: Explain <code>slice()</code> and <code>splice()</code> methods in JavaScript.</h2>
+            <p class="answer">
+                <strong>slice()</strong> and <strong>splice()</strong> are array methods in JavaScript:
+            </p>
+            <ul>
+                <li><strong>slice()</strong>: Returns a shallow copy of a portion of an array into a new array without
+                    modifying the original array. It takes two arguments: <code>start</code> and <code>end</code>
+                    indices (optional).</li>
+                <li><strong>splice()</strong>: Changes the contents of an array by removing, replacing, or adding
+                    elements. It takes three arguments: <code>start</code>, <code>deleteCount</code> (optional), and
+                    <code>items</code> to add (optional).
+                </li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+// slice()
+const array = [1, 2, 3, 4, 5];
+console.log(array.slice(1, 3));  // [2, 3]
+
+// splice()
+const array2 = [1, 2, 3, 4, 5];
+array2.splice(2, 1);  // Removes 1 element at index 2
+console.log(array2);  // [1, 2, 4, 5]
+    </pre>
+        </section>
+
+        <!-- Question 12 -->
+        <section class="question-container">
+            <h2>Question 12: What is event bubbling in JavaScript?</h2>
+            <p class="answer">
+                Event bubbling is a method of event propagation in JavaScript where an event starts from the deepest
+                target element and then bubbles up through the ancestors. When an event is triggered, it first executes
+                the handler on the target element, then moves up to the parent element, and so on, until it reaches the
+                root.
+            </p>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+<div id="parent">
+    <button id="child">Click Me</button>
+</div>
+
+<script>
+    document.getElementById('parent').addEventListener('click', () => {
+        console.log('Parent clicked');
+    });
+
+    document.getElementById('child').addEventListener('click', () => {
+        console.log('Child clicked');
+    });
+</script>
+    </pre>
+            <p>In the example above, clicking the child button triggers both the child and parent event listeners due to
+                event bubbling.</p>
+        </section>
+
+        <!-- Question 13 -->
+        <section class="question-container">
+            <h2>Question 13: What is the value of the <code>this</code> keyword in an arrow function?</h2>
+            <p class="answer">
+                In an arrow function, the value of <code>this</code> is lexically bound, meaning it uses the value of
+                <code>this</code> from the surrounding code where the arrow function is defined, rather than defining
+                its own <code>this</code> value.
+            </p>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+const obj = {
+    name: "JavaScript",
+    regularFunction: function() {
+        console.log(this.name);  // 'JavaScript'
+    },
+    arrowFunction: () => {
+        console.log(this.name);  // 'undefined' (this refers to global scope)
+    }
+};
+
+obj.regularFunction();  // JavaScript
+obj.arrowFunction();    // undefined
+    </pre>
+        </section>
+
+        <!-- Question 14 -->
+        <section class="question-container">
+            <h2>Question 14: Explain closures in JavaScript.</h2>
+            <p class="answer">
+                A closure is a function that has access to its own scope, the scope of the outer function, and the
+                global scope. Even after the outer function has returned, the inner function still has access to the
+                outer function's variables.
+            </p>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+function outerFunction(outerVariable) {
+    return function innerFunction(innerVariable) {
+        console.log("Outer Variable:", outerVariable);
+        console.log("Inner Variable:", innerVariable);
+    };
+}
+
+const closure = outerFunction("outer");
+closure("inner");  // Outer Variable: outer, Inner Variable: inner
+    </pre>
+        </section>
+
+        <!-- Question 15 -->
+        <section class="question-container">
+            <h2>Question 15: Explain recursion in JavaScript.</h2>
+            <p class="answer">
+                Recursion is a programming technique in which a function calls itself in order to solve smaller
+                instances of the same problem, until it reaches a base case (a condition where the recursion ends).
+            </p>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+function factorial(n) {
+    if (n === 1) {
+        return 1;  // Base case
+    }
+    return n * factorial(n - 1);  // Recursive case
+}
+
+console.log(factorial(5));  // Output: 120
+    </pre>
+        </section>
+
+        <!-- Question 16 -->
+        <section class="question-container">
+            <h2>Question 16: Explain higher-order functions in JavaScript.</h2>
+            <p class="answer">
+                A higher-order function is a function that either takes one or more functions as arguments, returns a
+                function, or both. These are functions that operate on other functions.
+            </p>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+function higherOrderFunction(callback) {
+    return callback();
+}
+
+function sayHello() {
+    return "Hello, World!";
+}
+
+console.log(higherOrderFunction(sayHello));  // Output: Hello, World!
+    </pre>
+            <p>In this example, <code>higherOrderFunction</code> takes another function, <code>sayHello</code>, as an
+                argument and executes it.</p>
+        </section>
+
+        <!-- Question 17 -->
+        <section class="question-container">
+            <h2>Question 17: Explain callback functions in JavaScript.</h2>
+            <p class="answer">
+                A callback function is a function passed into another function as an argument and is executed after some
+                kind of action is completed. It allows functions to run asynchronously.
+            </p>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+function fetchData(callback) {
+    setTimeout(() => {
+        console.log("Data fetched");
+        callback();
+    }, 2000);
+}
+
+function processData() {
+    console.log("Processing data");
+}
+
+fetchData(processData);  // Output: Data fetched (after 2 seconds), Processing data
+    </pre>
+            <p>Here, <code>fetchData</code> simulates an asynchronous task (like fetching data), and once the task is
+                complete, the <code>processData</code> function is called as a callback.</p>
+        </section>
+
+        <!-- Question 18 -->
+        <section class="question-container">
+            <h2>Question 18: Explain synchronous and asynchronous programming in JavaScript.</h2>
+            <p class="answer">
+                In JavaScript:
+            <ul>
+                <li><strong>Synchronous programming</strong> refers to code that runs in sequence, where each line is
+                    executed one after the other, blocking the execution of subsequent code until the current task is
+                    completed.</li>
+                <li><strong>Asynchronous programming</strong> allows code to run without blocking other code, meaning
+                    the execution of tasks can be deferred or handled in the background (e.g., fetching data from an
+                    API).</li>
+            </ul>
+            </p>
+            <p><strong>Example of Synchronous code:</strong></p>
+            <pre class="code-block">
+console.log("Start");
+console.log("Middle");
+console.log("End");
+    </pre>
+            <p><strong>Example of Asynchronous code:</strong></p>
+            <pre class="code-block">
+console.log("Start");
+
+setTimeout(() => {
+    console.log("Middle");
+}, 2000);
+
+console.log("End");
+    </pre>
+            <p>In the asynchronous example, the <code>setTimeout</code> function runs after a delay, allowing the rest
+                of the code to continue executing.</p>
+        </section>
+
+        <!-- Question 19 -->
+        <section class="question-container">
+            <h2>Question 19: Difference between <code>querySelector</code> and <code>querySelectorAll</code> in
+                JavaScript.</h2>
+            <p class="answer">
+                <code>querySelector</code> and <code>querySelectorAll</code> are methods used to select elements from
+                the DOM.
+            </p>
+            <ul>
+                <li><strong><code>querySelector</code></strong>: Selects the first element that matches the specified
+                    CSS selector.</li>
+                <li><strong><code>querySelectorAll</code></strong>: Selects all elements that match the specified CSS
+                    selector and returns a static NodeList (array-like collection).</li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+// querySelector
+const firstElement = document.querySelector(".myClass");
+console.log(firstElement);  // Outputs the first element with class "myClass"
+
+// querySelectorAll
+const allElements = document.querySelectorAll(".myClass");
+console.log(allElements);  // Outputs a NodeList of all elements with class "myClass"
+    </pre>
+        </section>
+
+        <!-- Question 20 -->
+        <section class="question-container">
+            <h2>Question 20: Explain hoisting in JavaScript.</h2>
+            <p class="answer">
+                Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of
+                their scope before the code is executed. This means you can use variables and functions before they are
+                declared in the code.
+            </p>
+            <p><strong>Example of hoisting with a variable:</strong></p>
+            <pre class="code-block">
+console.log(x);  // Output: undefined (due to hoisting)
+var x = 5;
+    </pre>
+            <p><strong>Example of hoisting with a function:</strong></p>
+            <pre class="code-block">
+sayHello();  // Output: Hello!
+
+function sayHello() {
+    console.log("Hello!");
+}
+    </pre>
+            <p>Note: <code>let</code> and <code>const</code> variables are also hoisted but are not initialized, meaning
+                you cannot use them before their declaration.</p>
+        </section>
+
+        <!-- Question 21 -->
+        <section class="question-container">
+            <h2>Question 21: How to use <code>map()</code>, <code>filter()</code>, and <code>reduce()</code> methods and
+                what are the differences between them?</h2>
+            <p class="answer">
+                <strong><code>map()</code></strong>, <strong><code>filter()</code></strong>, and
+                <strong><code>reduce()</code></strong> are array methods in JavaScript used for data transformation and
+                filtering.
+            </p>
+            <ul>
+                <li><strong><code>map()</code></strong>: Transforms each element of an array based on the callback
+                    function and returns a new array.</li>
+                <li><strong><code>filter()</code></strong>: Filters the elements of an array based on a condition and
+                    returns a new array with the elements that pass the condition.</li>
+                <li><strong><code>reduce()</code></strong>: Reduces an array to a single value by executing a reducer
+                    function on each element.</li>
+            </ul>
+            <p><strong>Examples:</strong></p>
+            <pre class="code-block">
+// map() example
+const numbers = [1, 2, 3, 4];
+const squared = numbers.map(num => num * num);
+console.log(squared);  // Output: [1, 4, 9, 16]
+
+// filter() example
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+console.log(evenNumbers);  // Output: [2, 4]
+
+// reduce() example
+const sum = numbers.reduce((acc, num) => acc + num, 0);
+console.log(sum);  // Output: 10
+    </pre>
+            <p><strong>Differences:</strong></p>
+            <ul>
+                <li><code>map()</code> transforms each element and returns a new array.</li>
+                <li><code>filter()</code> returns a new array with elements that meet a specific condition.</li>
+                <li><code>reduce()</code> accumulates a single value from an array.</li>
+            </ul>
+        </section>
+
+        <!-- Question 22 -->
+        <section class="question-container">
+            <h2>Question 22: Purpose of <code>async</code> and <code>await</code> keywords.</h2>
+            <p class="answer">
+                <strong><code>async</code></strong> and <strong><code>await</code></strong> are used to handle
+                asynchronous operations in JavaScript, making it easier to work with promises.
+            </p>
+            <ul>
+                <li><strong><code>async</code></strong>: Declares a function as asynchronous and ensures that it returns
+                    a promise.</li>
+                <li><strong><code>await</code></strong>: Pauses the execution of an asynchronous function until the
+                    promise is resolved.</li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+async function fetchData() {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    console.log(data);
+}
+
+fetchData();
+    </pre>
+            <p>In this example, the <code>fetchData</code> function pauses at each <code>await</code> until the promise
+                is resolved.</p>
+        </section>
+
+        <!-- Question 23 -->
+        <section class="question-container">
+            <h2>Question 23: Explain the working of the event loop in JavaScript.</h2>
+            <p class="answer">
+                The event loop is a mechanism in JavaScript that allows asynchronous code (e.g., callbacks, promises) to
+                run without blocking the main thread. It continuously monitors the call stack and the message queue.
+            </p>
+            <ul>
+                <li>When the call stack is empty, the event loop checks the message queue for pending tasks (e.g.,
+                    setTimeout, I/O operations).</li>
+                <li>Once the call stack is free, the event loop pushes tasks from the message queue to the call stack
+                    for execution.</li>
+            </ul>
+            <p><strong>Example of the event loop:</strong></p>
+            <pre class="code-block">
+console.log('Start');
+
+setTimeout(() => {
+    console.log('Async operation');
+}, 0);
+
+console.log('End');
+    </pre>
+            <p>Output will be:</p>
+            <pre class="code-block">
+Start
+End
+Async operation
+    </pre>
+            <p>Even though the <code>setTimeout</code> is set to 0, it still runs after synchronous code because of the
+                event loop.</p>
+        </section>
+
+        <!-- Question 24 -->
+        <section class="question-container">
+            <h2>Question 24: What is memoization in JavaScript?</h2>
+            <p class="answer">
+                Memoization is an optimization technique used to speed up expensive function calls by caching the
+                results of function calls and returning the cached result when the same inputs occur again.
+            </p>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+function memoize(fn) {
+    const cache = {};
+    return function(...args) {
+        const key = JSON.stringify(args);
+        if (cache[key]) {
+            return cache[key];
+        } else {
+            const result = fn(...args);
+            cache[key] = result;
+            return result;
+        }
+    };
+}
+
+function slowFunction(num) {
+    return num * num;
+}
+
+const memoizedFunction = memoize(slowFunction);
+
+console.log(memoizedFunction(5));  // Calculated and stored
+console.log(memoizedFunction(5));  // Retrieved from cache
+    </pre>
+            <p>In this example, the result of calling the function with the same arguments is cached, improving
+                performance.</p>
+        </section>
+
+        <!-- Question 25 -->
+        <section class="question-container">
+            <h2>Question 25: Difference between <code>innerHTML</code> and <code>innerText</code>.</h2>
+            <p class="answer">
+                <strong><code>innerHTML</code></strong> and <strong><code>innerText</code></strong> are properties in
+                JavaScript used to manipulate the content of HTML elements.
+            </p>
+            <ul>
+                <li><strong><code>innerHTML</code></strong>: Returns or sets the HTML content inside an element. It
+                    includes HTML tags and elements.</li>
+                <li><strong><code>innerText</code></strong>: Returns or sets the visible text inside an element. It only
+                    includes the text, ignoring HTML tags.</li>
+            </ul>
+            <p><strong>Example of <code>innerHTML</code>:</strong></p>
+            <pre class="code-block">
+const divElement = document.querySelector('#myDiv');
+divElement.innerHTML = '<strong>Hello</strong> World!';
+// Output will be: Hello (bold) World!
+    </pre>
+            <p><strong>Example of <code>innerText</code>:</strong></p>
+            <pre class="code-block">
+const divElement = document.querySelector('#myDiv');
+divElement.innerText = '<strong>Hello</strong> World!';
+// Output will be: <strong>Hello</strong> World! (without HTML tags)
+    </pre>
+        </section>
+
+        <!-- Question 26 -->
+        <section class="question-container">
+            <h2>Question 26: How can you remove duplicates from an array in JavaScript?</h2>
+            <p class="answer">
+                Removing duplicates from an array can be done using different techniques. One of the most common and
+                efficient ways is by using the <code>Set</code> object, which automatically removes duplicates.
+            </p>
+            <p><strong>Example:</strong></p>
+            <pre class="code-block">
+const numbers = [1, 2, 3, 4, 3, 2, 5, 6];
+const uniqueNumbers = [...new Set(numbers)];
+console.log(uniqueNumbers); // Output: [1, 2, 3, 4, 5, 6]
+    </pre>
+            <p>In this example, the <code>Set</code> constructor removes duplicates, and we use the spread operator
+                (<code>...</code>) to convert the set back to an array.</p>
+        </section>
+
+        <!-- Question 27 -->
+        <section class="question-container">
+            <h2>Question 27: Explain how <code>localStorage</code>, <code>sessionStorage</code>, and cookies differ.
+            </h2>
+            <p class="answer">
+                <strong><code>localStorage</code></strong>, <strong><code>sessionStorage</code></strong>, and
+                <strong>cookies</strong> are all used to store data on the client side, but they differ in terms of
+                storage capacity, persistence, and accessibility.
+            </p>
+            <ul>
+                <li><strong><code>localStorage</code></strong>: Stores data with no expiration time. Data persists even
+                    after the browser is closed and reopened. Storage limit is typically around 5-10MB.</li>
+                <li><strong><code>sessionStorage</code></strong>: Stores data for the duration of the page session. Data
+                    is cleared when the browser or tab is closed. Storage limit is similar to <code>localStorage</code>.
+                </li>
+                <li><strong>Cookies</strong>: Stores small amounts of data (up to 4KB) that can have a set expiration
+                    time. Cookies are sent with every HTTP request to the server.</li>
+            </ul>
+            <p><strong>Examples:</strong></p>
+            <pre class="code-block">
+// localStorage example
+localStorage.setItem('name', 'John');
+console.log(localStorage.getItem('name')); // Output: John
+
+// sessionStorage example
+sessionStorage.setItem('sessionID', '123456');
+console.log(sessionStorage.getItem('sessionID')); // Output: 123456
+
+// Cookie example (using document.cookie)
+document.cookie = "username=John; expires=Fri, 18 Sep 2024 12:00:00 UTC; path=/";
+    </pre>
+        </section>
+
+        <!-- Question 28 -->
+        <section class="question-container">
+            <h2>Question 28: How can we handle callback hell in JavaScript?</h2>
+            <p class="answer">
+                Callback hell occurs when multiple asynchronous operations are nested, leading to difficult-to-read and
+                maintain code. To handle callback hell, we can use the following approaches:
+            </p>
+            <ul>
+                <li><strong>Promises:</strong> Promises provide a cleaner syntax for handling asynchronous code,
+                    avoiding deeply nested callbacks.</li>
+                <li><strong>Async/Await:</strong> Async/await allows writing asynchronous code that looks synchronous,
+                    further simplifying code readability.</li>
+            </ul>
+            <p><strong>Example using Promises:</strong></p>
+            <pre class="code-block">
+// Callback hell example
+doTask1(function() {
+    doTask2(function() {
+        doTask3(function() {
+            // Nested callbacks
+        });
+    });
+});
+
+// Promises example
+doTask1()
+    .then(doTask2)
+    .then(doTask3)
+    .catch(error => console.log(error));
+
+// Async/Await example
+async function executeTasks() {
+    try {
+        await doTask1();
+        await doTask2();
+        await doTask3();
+    } catch (error) {
+        console.log(error);
+    }
+}
+executeTasks();
+    </pre>
+        </section>
+
+        <!-- Question 29 -->
+        <section class="question-container">
+            <h2>Question 29: Explain <code>export default</code> and named exports in JavaScript.</h2>
+            <p class="answer">
+                In JavaScript, the <code>export</code> statement is used to make functions, objects, or values available
+                to other modules. There are two types of exports: <strong>default export</strong> and <strong>named
+                    export</strong>.
+            </p>
+            <ul>
+                <li><strong><code>export default</code></strong>: Used to export a single value or function from a
+                    module. A module can only have one default export.</li>
+                <li><strong>Named export</strong>: Used to export multiple values or functions from a module. A module
+                    can have multiple named exports.</li>
+            </ul>
+            <p><strong>Example of <code>export default</code>:</strong></p>
+            <pre class="code-block">
+// math.js
+export default function add(a, b) {
+    return a + b;
+}
+
+// In another file
+import add from './math.js';
+console.log(add(2, 3)); // Output: 5
+    </pre>
+            <p><strong>Example of named exports:</strong></p>
+            <pre class="code-block">
+// utils.js
+export function multiply(a, b) {
+    return a * b;
+}
+export function subtract(a, b) {
+    return a - b;
+}
+
+// In another file
+import { multiply, subtract } from './utils.js';
+console.log(multiply(2, 3)); // Output: 6
+console.log(subtract(5, 2)); // Output: 3
+    </pre>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> JavaScript Interview Q&A. All rights reserved.</p>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
